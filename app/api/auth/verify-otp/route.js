@@ -36,5 +36,6 @@ export async function POST(req) {
     if (want && user.role !== want) user = await prisma.user.update({ where: { id: user.id }, data: { role: want } });
   }
   await createSession(user);
-  return json({ ok: true, user: { name: user.name } });
+const dest = { MUNICIPAL: '/municipal', WORKER: '/worker', ADMIN: '/admin' }[user.role] || '/dashboard';
+return json({ ok: true, dest, user: { name: user.name } });
 }
