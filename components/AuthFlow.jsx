@@ -42,7 +42,12 @@ export default function AuthFlow({ mode }) {
   async function verify(code) {
     if (busy) return;
     setBusy(true); setErr('');
-    try { await post('/api/auth/verify-otp', { phone: f.phone, otp: code, purpose: mode }); router.replace('/dashboard'); router.refresh(); }
+    
+      try {
+  const d = await post('/api/auth/verify-otp', { phone: f.phone, otp: code, purpose: mode });
+  window.location.assign(d.dest || '/dashboard');
+  setTimeout(() => { setBusy(false); setErr('Logged in, but the next page is slow to open. Refresh, or go to ' + (d.dest || '/dashboard')); }, 8000);
+}
     catch (x) { setErr(x.message); setDigits(EMPTY); refs.current[0]?.focus(); setBusy(false); }
   }
   function onDigit(i, v) {
