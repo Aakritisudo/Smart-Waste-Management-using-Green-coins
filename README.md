@@ -1,8 +1,7 @@
-# Green Coins (no-database demo)
+# Green Coins 
 
-Next.js 14 (App Router) + React 18. **No database, no accounts, no API keys needed.**
-All data lives in memory and is pre-filled with demo accounts, shops, localities and pickups.
-Restarting the server resets everything to the demo data.
+Next.js 14 (App Router) + React 18.
+
 
 ## Run it
 ```
